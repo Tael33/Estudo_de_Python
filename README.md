@@ -1,2 +1,2 @@
-# Estudo_de_Pytho
+# Estudo_de_Python
 Aprendendo logica de programação com Python
