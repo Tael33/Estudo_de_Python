@@ -1,0 +1,74 @@
+def validar(usuario, senha):
+    """
+    Valida o usuário e a senha.
+    Retorna uma lista de listas no formato: [['usuario', True], ['senha', True/False]]
+    """
+    retorno = []
+    # Validação do usuário (sempre True se não for vazio)
+    if usuario:
+        resultado = []
+        usuario_format = usuario.strip().split()
+        novo_usuario = ''.join(usuario_format)
+        valor = True
+        resultado.append(novo_usuario)
+        resultado.append(valor)
+        retorno.append(resultado)
+        
+    # Validação da senha
+    if senha:
+        resultado = []
+        senha_format = senha.strip().split()
+        nova_senha = ''.join(senha_format)
+        
+        # A condição de validação principal está aqui
+        if len(nova_senha) > 6:
+            valor = True
+        else:
+            valor = False # Senha inválida
+            
+        resultado.append(nova_senha)
+        resultado.append(valor)
+        retorno.append(resultado)
+        
+    return retorno
+
+# --- Laço de Repetição Principal ---
+while True:
+    usuario = input("Digite o seu nome de usuário: ")
+    senha = input("Digite sua senha com mais de 6 caracteres: ")
+
+    # 1. Chama a função para validar os dados digitados
+    retorno_validacao = validar(usuario, senha)
+
+    # 2. Assume que tudo é válido até que se prove o contrário
+    tudo_valido = True
+
+    # 3. Verifica se os campos não foram deixados em branco
+    if len(retorno_validacao) < 2:
+        print("\nERRO: Usuário e senha não podem ser vazios. Tente novamente.\n")
+        tudo_valido = False
+    else:
+        # 4. Usa o laço FOR para verificar a lista de resultados
+        print("--- Verificando... ---")
+        for item in retorno_validacao:
+            # item[0] é o nome ('usuario' ou 'senha'), item[1] é o valor (True ou False)
+            nome_campo = item[0]
+            status_validacao = item[1]
+            
+            print(f"Campo '{nome_campo}': {'Válido' if status_validacao else 'Inválido'}")
+
+            # Se encontrarmos qualquer resultado 'False', a validação geral falhou
+            if status_validacao is False:
+                tudo_valido = False
+    
+    # 5. Se, após a verificação, tudo continuar válido, saímos do laço
+    if tudo_valido:
+        print("\n✅ Usuário e senha validados com sucesso!\n")
+        break  # Encerra o laço 'while True'
+    else:
+        # Caso contrário, informa o usuário e o laço continua
+        print("\n❌ Dados inválidos. Por favor, digite novamente.\n")
+
+# O programa só chegará aqui após sair do laço
+print("--- Dados Finais Validados ---")
+print(retorno_validacao)
