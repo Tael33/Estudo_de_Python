@@ -26,12 +26,13 @@
 # os.path.exists("") - verifica se existe o arquivo pelo caminho
 # os.rmdir("") - remove pasta se tiver vazia
 
-arquivo = open('manipulação_de_arquivos/teste.txt', 'a')
+# arquivo = open('manipulação_de_arquivos/teste.txt', 'a')
 
-#arquivo.readable()
-#print(arquivo.read())
+# #arquivo.readable()
+# #print(arquivo.read())
 
-arquivo.close()
+# arquivo.close()
 
-with open('manipulação_de_arquivo/teste.txt', 'r', encoding = 'UTF-8') as arq:
-    arq.write()
+with open('teste.txt', 'r', encoding = 'UTF-8') as arq:
+    
+    print(arq.readable())
