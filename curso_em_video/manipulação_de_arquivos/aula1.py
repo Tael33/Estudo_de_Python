@@ -1,5 +1,5 @@
 
-# open("caminho", "modo")
+# open("caminho", "modo", encoding = 'UTF-8')
 
 # Modos
 
@@ -31,6 +31,7 @@ arquivo = open('manipulação_de_arquivos/teste.txt', 'a')
 #arquivo.readable()
 #print(arquivo.read())
 
-
-
 arquivo.close()
+
+with open('manipulação_de_arquivo/teste.txt', 'r', encoding = 'UTF-8') as arq:
+    arq.write()
