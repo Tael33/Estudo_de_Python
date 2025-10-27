@@ -1,0 +1,158 @@
+ /* --- ESTILOS GERAIS --- */
+        :root {
+            --cor-python-azul: #3776AB;
+            --cor-python-amarelo: #FFD43B;
+            --cor-fundo: #f4f7f6;
+            --cor-bloco: #ffffff;
+            --cor-texto: #1c1c1c;
+            --cor-code-fundo: #f0efff; /* Monokai Fundo */
+            --cor-code-texto: #bb00ff; /* Monokai Texto */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- NOVA BARRA DE NAVEGAÇÃO (TOPO) --- */
+        .navbar {
+            width: 100%;
+            background-color: var(--cor-python-azul);
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky; /* Gruda no topo ao rolar */
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-container {
+            width: 100%;
+            max-width: 900px; /* Mesma largura do main.conteudo */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--cor-python-amarelo);
+            text-decoration: none;
+        }
+        .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .navbar-links li {
+            margin-left: 15px;
+        }
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+        .navbar-links a:hover {
+            background-color: var(--cor-python-amarelo); /* Amarelo */
+            color: var(--cor-python-azul); /* Azul */
+        }
+        /* --- FIM DA BARRA DE NAVEGAÇÃO --- */
+
+
+        /* --- CONTEÚDO PRINCIPAL (AJUSTADO) --- */
+        main.conteudo {
+            /* margin-left: 270px; <-- REMOVIDO */
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto 0 auto; /* Adiciona margem no topo e centraliza */
+        }
+
+        section {
+            background-color: var(--cor-bloco);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            border-bottom: 2px solid var(--cor-python-azul);
+            padding-bottom: 10px;
+        }
+        section h2 {
+            color: var(--cor-python-azul);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        /* --- BLOCOS DE CÓDIGO --- */
+        pre {
+            background-color: var(--cor-code-fundo);
+            color: var(--cor-code-texto);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1em;
+            
+        }
+                /* --- ADICIONAR ESTA REGRA --- */
+        pre code {
+            font-weight: bold;
+        }
+        
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* --- BLOCOS DE EXERCÍCIO --- */
+        .exercicio-resolvido {
+            background-color: #bcbcbc;
+            border: 1px solid #8fbaff;
+            border-left: 5px solid var(--cor-python-amarelo);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .exercicio-resolvido h3 {
+            margin-top: 0;
+            color: #004cd9;
+        }
+        .enunciado {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }

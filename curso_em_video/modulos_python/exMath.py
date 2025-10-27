@@ -8,7 +8,7 @@ print(f"O valor digitados foi {num} e sua porção inteira é {trunc(num)}")
 print(f"O valor digitados foi {num} e sua porção inteira é {int(num)}")'''
 
 
-'''Foro um programa qua leia o comprimento do coteto oposto e do coteto
+'''Faça um programa qua leia o comprimento do cateto oposto e do cateto
 adjacente de um triânquio retângulo. colcule ce mostre o comprimento
 do hipotenusa.'''
 

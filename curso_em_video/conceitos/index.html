@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Aula - Laboratório de Programação (Python)</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">E.D.PY</a>
+            <ul class="navbar-links">
+                <li><a href="#revisao">Revisão</a></li>
+                <li><a href="#controle">Controle</a></li>
+                <li><a href="#estruturas-dados">Estruturas</a></li>
+                <li><a href="#funcoes">Funções</a></li>
+                <li><a href="#arquivos">Arquivos</a></li>
+                <li><a href="#exercicios">Exercícios</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="conteudo">
+        <h1>Para Estudo</h1>
+        <p style="text-align: center; margin-top: -10px; color: #555;">Baseado no material da Prof. Kenia Parente Lopes Mendonça</p>
+
+        <section id="revisao">
+            <h2>1. Revisão de Algoritmos</h2>
+            
+            <article id="saida-dados">
+                <h3>1.1 Saída de Dados (<code>print</code>)</h3>
+                <p>O comando <code>print()</code> é usado para exibir mensagens ou o conteúdo de variáveis no console (terminal).</p>
+                <pre><code><span style="color: #75715e;"># Exemplo 1: Imprimindo texto (string)</span>
+print("Olá, mundo!")
+
+<span style="color: #75715e;"># Exemplo 2: Imprimindo variáveis</span>
+nome = "Maria"
+idade = 25
+print(nome, idade)
+
+<span style="color: #75715e;"># Exemplo 3: F-strings (Forma moderna de formatar)</span>
+<span style="color: #75715e;"># Coloque um 'f' antes das aspas e as variáveis entre {}</span>
+print(f"O nome da aluna é {nome} e sua idade é {idade}.")</code></pre>
+            </article>
+            
+            <article id="variaveis">
+                <h3>1.2 Variáveis e Tipos de Dados</h3>
+                <p>Variáveis são "contêineres" para armazenar valores. Python é uma linguagem de tipagem dinâmica, o que significa que você não precisa declarar o tipo; ele é inferido automaticamente.</p>
+                <ul>
+                    <li><strong><code>str</code> (String):</strong> Texto. Ex: <code>"Olá"</code>, <code>'Python'</code></li>
+                    <li><strong><code>int</code> (Inteiro):</strong> Números inteiros. Ex: <code>10</code>, <code>-5</code>, <code>2025</code></li>
+                    <li><strong><code>float</code> (Ponto Flutuante):</strong> Números com casas decimais. Ex: <code>1.5</code>, <code>-10.99</code></li>
+                    <li><strong><code>bool</code> (Booleano):</strong> Valor lógico. Ex: <code>True</code>, <code>False</code> (Sempre com 'T' e 'F' maiúsculos)</li>
+                </ul>
+                <pre><code>nome_aluno = "João"     <span style="color: #75715e;"># str</span>
+media_final = 9.5      <span style="color: #75715e;"># float</span>
+idade = 19             <span style="color: #75715e;"># int</span>
+aprovado = True        <span style="color: #75715e;"># bool</span></code></pre>
+            </article>
+
+            <article id="operadores">
+                <h3>1.3 Operadores</h3>
+                <h4>Aritméticos</h4>
+                <ul>
+                    <li><code>+</code> (Adição)</li>
+                    <li><code>-</code> (Subtração)</li>
+                    <li><code>*</code> (Multiplicação)</li>
+                    <li><code>/</code> (Divisão - sempre retorna <code>float</code>)</li>
+                    <li><code>//</code> (Divisão Inteira - descarta a parte decimal)</li>
+                    <li><code>%</code> (Módulo - resto da divisão)</li>
+                    <li><code>**</code> (Exponenciação - elevado à potência)</li>
+                </ul>
+                <pre><code>print(10 / 3)   <span style="color: #75715e;"># Saída: 3.333...</span>
+print(10 // 3)  <span style="color: #75715e;"># Saída: 3</span>
+print(10 % 3)   <span style="color: #75715e;"># Saída: 1 (resto)</span>
+print(2 ** 3)   <span style="color: #75715e;"># Saída: 8 (2*2*2)</span></code></pre>
+                
+                <h4>Comparação (Retornam <code>True</code> ou <code>False</code>)</h4>
+                <ul>
+                    <li><code>==</code> (Igual a)</li>
+                    <li><code>!=</code> (Diferente de)</li>
+                    <li><code>&gt;</code> (Maior que)</li>
+                    <li><code>&lt;</code> (Menor que)</li>
+                    <li><code>&gt;=</code> (Maior ou igual a)</li>
+                    <li><code>&lt;=</code> (Menor ou igual a)</li>
+                </ul>
+                
+                <h4>Lógicos (Combinam expressões booleanas)</h4>
+                <ul>
+                    <li><code>and</code> (E lógico - Ambas as condições devem ser <code>True</code>)</li>
+                    <li><code>or</code> (OU lógico - Pelo menos uma condição deve ser <code>True</code>)</li>
+                    <li><code>not</code> (NÃO lógico - Inverte o valor)</li>
+                </ul>
+                <pre><code>idade = 20
+possui_cnh = False
+
+<span style="color: #75715e;"># Exemplo de 'and'</span>
+pode_dirigir = (idade >= 18) <span style="color: #f92672;">and</span> (possui_cnh == True)
+print(pode_dirigir) <span style="color: #75715e;"># Saída: False</span></code></pre>
+            </article>
+            
+            <article id="entrada-dados">
+                <h3>1.4 Entrada de Dados (<code>input</code>)</h3>
+                <p>O comando <code>input()</code> pausa o programa e espera o usuário digitar algo. <strong>Crucial:</strong> <code>input()</code> SEMPRE retorna o valor como uma <strong>string (<code>str</code>)</strong>.</p>
+                <p>Você deve converter o tipo manualmente usando <code>int()</code>, <code>float()</code>, etc.</p>
+                <pre><code><span style="color: #756e4d;"># 1. Pede o nome (str)</span>
+nome = input("Digite seu nome: ")
+
+<span style="color: #75715e;"># 2. Pede a idade (str) e converte para int</span>
+idade_str = input("Digite sua idade: ")
+idade_int = int(idade_str)
+
+<span style="color: #75715e;"># 3. Forma direta (mais comum)</span>
+nota = float(input("Digite sua nota: "))
+
+<span style="color: #75715e;"># 4. Cálculo</span>
+proxima_idade = idade_int + 1
+print(f"Olá, {nome}. Ano que vem você terá {proxima_idade} anos.")</code></pre>
+            </article>
+        </section>
+
+        <section id="controle">
+            <h2>2. Estruturas de Controle</h2>
+            
+            <article id="condicionais">
+                <h3>2.1 Condicionais (<code>if</code> / <code>elif</code> / <code>else</code>)</h3>
+                <p>Executa blocos de código diferentes com base em uma condição ser <code>True</code> ou <code>False</code>. A indentação (espaços no início da linha) é obrigatória e define o bloco.</p>
+                <pre><code>media = float(input("Digite a média final: "))
+
+<span style="color: #f92672;">if</span> media >= 7.0:
+    print("Aprovado!")
+    print("Parabéns!")
+<span style="color: #f92672;">elif</span> media >= 4.0:
+    print("Recuperação.")
+<span style="color: #f92672;">else</span>:
+    print("Reprovado.")
+
+print("Fim do programa.") <span style="color: #75715e;"># Este 'print' está fora do bloco, sempre executa</span></code></pre>
+            </article>
+
+            <article id="while">
+                <h3>2.2 Laço (<code>while</code>)</h3>
+                <p>O <code>while</code> (enquanto) repete um bloco de código <strong>enquanto</strong> uma condição for verdadeira. É ideal para quando não sabemos quantas vezes vamos repetir.</p>
+                
+                <h4>Exemplo 1: Contador Simples</h4>
+                <pre><code>cont = 0
+<span style="color: #f92672;">while</span> cont < 5:
+    print(f"O número é {cont}")
+    cont = cont + 1  <span style="color: #75715e;"># IMPORTANTE: Atualizar a variável de controle</span>
+
+print("Laço 'while' encerrado.")</code></pre>
+                
+                <h4>Exemplo 2: Condição de Parada (Flag)</h4>
+                <pre><code>numero = -1 <span style="color: #75715e;"># Inicializa com um valor que entra no laço</span>
+
+<span style="color: #f92672;">while</span> numero != 0:
+    numero = int(input("Digite um número (ou 0 para sair): "))
+    print(f"Você digitou {numero}")
+
+print("Você digitou 0. Fim.")</code></pre>
+            </article>
+
+            <article id="for">
+                <h3>2.3 Laço (<code>for</code>)</h3>
+                <p>O <code>for</code> (para) é usado para iterar sobre uma sequência (como uma lista, string ou um intervalo de números).</p>
+
+                <h4>Exemplo 1: Iterando sobre uma Lista</h4>
+                <pre><code>frutas = ["Maçã", "Banana", "Uva"]
+
+<span style="color: #f92672;">for</span> fruta <span style="color: #f92672;">in</span> frutas:
+    print(f"Eu gosto de {fruta}")</code></pre>
+                
+                <h4>Exemplo 2: Usando <code>range()</code></h4>
+                <p>A função <code>range()</code> gera uma sequência de números. É a forma mais comum de repetir algo N vezes.</p>
+                <pre><code><span style="color: #75715e;"># range(5) gera 0, 1, 2, 3, 4</span>
+<span style="color: #f92672;">for</span> i <span style="color: #f92672;">in</span> range(5):
+    print(f"Repetição número {i}")
+
+<span style="color: #75715e;"># range(1, 6) gera 1, 2, 3, 4, 5 (começa em 1, para ANTES do 6)</span>
+<span style="color: #f92672;">for</span> i <span style="color: #f92672;">in</span> range(1, 6):
+    print(f"Contando: {i}")</code></pre>
+            </article>
+        </section>
+
+        <section id="estruturas-dados">
+            <h2>3. Estruturas de Dados</h2>
+
+            <article id="listas">
+                <h3>3.1 Listas (Vetores Unidimensionais)</h3>
+                <p>Listas são coleções ordenadas e mutáveis de itens. Elas são o equivalente a "vetores" ou "arrays" em outras linguagens. São definidas por colchetes <code>[]</code>.</p>
+                
+                <pre><code><span style="color: #75715e;"># 1. Criando uma lista</span>
+notas = [9.5, 7.0, 8.5, 10.0]
+nomes = ["Ana", "Bruno", "Carla"]
+lista_vazia = []
+
+<span style="color: #75715e;"># 2. Acessando itens (índice começa em 0)</span>
+print(nomes[0])   <span style="color: #75715e;"># Saída: Ana</span>
+print(notas[2])   <span style="color: #75715e;"># Saída: 8.5</span>
+
+<span style="color: #75715e;"># 3. Alterando um item</span>
+nomes[1] = "Bruno Costa"
+
+<span style="color: #75715e;"># 4. Adicionando um item (no final)</span>
+nomes.append("Daniel")
+
+<span style="color: #75715e;"># 5. Removendo um item</span>
+nomes.pop()         <span style="color: #75715e;"># Remove o último (Daniel)</span>
+nomes.remove("Ana") <span style="color: #75715e;"># Remove pelo valor "Ana"</span>
+
+<span style="color: #75715e;"># 6. Tamanho da lista</span>
+tamanho = len(nomes)
+print(f"A lista tem {tamanho} nomes.")
+
+<span style="color: #75715e;"># 7. Iterando com 'for' (muito comum)</span>
+<span style="color: #f92672;">for</span> nota <span style="color: #f92672;">in</span> notas:
+    print(nota)
+</code></pre>
+            </article>
+            
+            <article id="matrizes">
+                <h3>3.2 Listas (Matrizes Bidimensionais)</h3>
+                <p>Matrizes em Python são simplesmente "listas dentro de listas".</p>
+                <pre><code><span style="color: #75715e;"># Exemplo do PDF (Cidades do Tocantins)</span>
+cidades = [ 
+    ["Paraiso", 1963],  <span style="color: #75715e;"># Linha 0</span>
+    ["Gurupi", 1958],   <span style="color: #75715e;"># Linha 1</span>
+    ["Palmas", 1989],   <span style="color: #75715e;"># Linha 2</span>
+    ["Miranorte", 1964] <span style="color: #75715e;"># Linha 3</span>
+]
+
+<span style="color: #75715e;"># Acessando dados ( [linha][coluna] )</span>
+print(cidades[2][0])  <span style="color: #75715e;"># Saída: Palmas (Linha 2, Coluna 0)</span>
+print(cidades[0][1])  <span style="color: #75715e;"># Saída: 1963 (Linha 0, Coluna 1)</span>
+
+<span style="color: #75715e;"># Iterando sobre a matriz com 'for'</span>
+<span style="color: #f92672;">for</span> cidade_info <span style="color: #f92672;">in</span> cidades:
+    <span style="color: #75715e;"># cidade_info é uma lista, ex: ["Paraiso", 1963]</span>
+    nome = cidade_info[0]
+    ano = cidade_info[1]
+    print(f"A cidade de {nome} foi fundada em {ano}.")
+
+<span style="color: #75715e;"># Desempacotamento direto (mais "Pythônico")</span>
+<span style="color: #f92672;">for</span> nome, ano <span style="color: #f92672;">in</span> cidades:
+    print(f"{nome} ({ano})")
+</code></pre>
+            </article>
+            
+            <article id="dicionarios">
+                <h3>3.3 Dicionários (<code>dict</code>)</h3>
+                <p>Dicionários são coleções <strong>não ordenadas</strong> (em versões antigas do Python) de pares <strong>chave-valor</strong>. Eles são definidos por chaves <code>{}</code>. Ideais para armazenar dados de um objeto (ex: aluno, produto).</p>
+                <pre><code><span style="color: #75715e;"># 1. Criando um dicionário</span>
+aluno = {
+    "nome": "Carla",
+    "matricula": "202403",
+    "nota_final": 9.8,
+    "ativo": True
+}
+
+<span style="color: #75715e;"># 2. Acessando valores (pela CHAVE)</span>
+print(aluno["nome"])       <span style="color: #75715e;"># Saída: Carla</span>
+print(aluno["nota_final"]) <span style="color: #75715e;"># Saída: 9.8</span>
+<span style="color: #75715e;"># Forma mais segura (não dá erro se a chave não existir)</span>
+print(aluno.get("curso", "Não informado")) <span style="color: #75715e;"># Saída: Não informado</span>
+
+<span style="color: #75715e;"># 3. Adicionando ou Alterando valores</span>
+aluno["nota_final"] = 10.0  <span style="color: #75715e;"># Altera valor existente</span>
+aluno["curso"] = "Sistemas de Informação" <span style="color: #75715e;"># Adiciona novo par</span>
+
+<span style="color: #75715e;"># 4. Iterando sobre um dicionário</span>
+<span style="color: #f92672;">for</span> chave, valor <span style="color: #f92672;">in</span> aluno.items():
+    print(f"{chave}: {valor}")
+
+<span style="color: #75715e;"># Saída:</span>
+<span style="color: #75715e;"># nome: Carla</span>
+<span style="color: #75715e;"># matricula: 202403</span>
+<span style="color: #75715e;"># ...etc</span>
+</code></pre>
+            </article>
+        </section>
+
+        <section id="funcoes">
+            <h2>4. Funções (<code>def</code>)</h2>
+            <p>Funções são blocos de código reutilizáveis que executam uma tarefa. Elas são definidas com a palavra-chave <code>def</code>.</p>
+            <ul>
+                <li><strong>Parâmetros:</strong> Variáveis que a função *recebe*.</li>
+                <li><strong><code>return</code>:</strong> O valor que a função *devolve*.</li>
+            </ul>
+            <pre><code><span style="color: #75715e;"># 1. Definindo uma função simples</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">saudacao</span>(nome):
+    print(f"Olá, {nome}! Bem-vindo(a).")
+
+<span style="color: #75715e;"># 2. Definindo uma função que retorna um valor</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">somar</span>(a, b):
+    resultado = a + b
+    <span style="color: #f92672;">return</span> resultado
+
+<span style="color: #75715e;"># --- Programa Principal ---</span>
+
+<span style="color: #75715e;"># 3. Chamando (executando) as funções</span>
+saudacao("Ana")  <span style="color: #75715e;"># Chama a função, que vai imprimir "Olá, Ana!..."</span>
+
+valor_soma = somar(10, 5) <span style="color: #75715e;"># Chama a função e armazena o retorno</span>
+print(f"O resultado da soma é {valor_soma}") <span style="color: #75715e;"># Saída: 15</span>
+</code></pre>
+        </section>
+
+        <section id="arquivos">
+            <h2>5. Manipulação de Arquivos (I/O)</h2>
+            <p>Python pode ler e escrever em arquivos de texto (<code>.txt</code>, <code>.csv</code>, etc.) de forma simples.</p>
+            <p>A forma mais segura de fazer isso é com o gerenciador de contexto <code>with open()</code>, que garante que o arquivo será fechado automaticamente, mesmo se ocorrer um erro.</p>
+
+            <h3>Escrevendo em um Arquivo (<code>'w'</code> e <code>'a'</code>)</h3>
+            <ul>
+                <li><strong>Modo <code>'w'</code> (write - escrita):</strong> Cria um novo arquivo (ou apaga um existente) e escreve conteúdo nele.</li>
+                <li><strong>Modo <code>'a'</code> (append - anexar):</strong> Adiciona conteúdo ao final de um arquivo existente, sem apagar o que já estava lá.</li>
+            </ul>
+            <pre><code>dados = "Esta é a primeira linha.\nEsta é a segunda linha.\n"
+
+<span style="color: #75715e;"># 1. Escrevendo (Modo 'w' - apaga o anterior)</span>
+<span style="color: #f92672;">with</span> open("meu_arquivo.txt", "w", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
+    arquivo.write(dados)
+
+<span style="color: #75715e;"># 2. Anexando (Modo 'a' - adiciona ao final)</span>
+<span style="color: #f92672;">with</span> open("meu_arquivo.txt", "a", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
+    arquivo.write("Esta linha foi anexada.\n")</code></pre>
+
+            <h3>Lendo de um Arquivo (<code>'r'</code>)</h3>
+            <p>O <strong>Modo <code>'r'</code> (read - leitura)</strong> é usado para ler o conteúdo de um arquivo.</p>
+            <ul>
+                <li><code>.read()</code>: Lê o arquivo inteiro como uma única string.</li>
+                <li><code>.readline()</code>: Lê apenas a próxima linha.</li>
+                <li><code>.readlines()</code>: Lê todas as linhas e as retorna como uma lista de strings.</li>
+            </ul>
+
+            <pre><code><span style="color: #75715e;"># 1. Tenta abrir o arquivo para leitura</span>
+<span style="color: #f92672;">try</span>:
+    <span style="color: #f92672;">with</span> open("meu_arquivo.txt", "r", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
+        <span style="color: #75715e;"># Exemplo A: Ler tudo de uma vez</span>
+        conteudo_completo = arquivo.read()
+        print("--- Conteúdo Completo ---")
+        print(conteudo_completo)
+        
+        <span style="color: #75715e;"># Para ler linhas (precisa 'voltar' ao início do arquivo)</span>
+        arquivo.seek(0)
+        
+        <span style="color: #75715e;"># Exemplo B: Ler linha por linha (ideal para arquivos grandes)</span>
+        print("\n--- Lendo Linha por Linha ---")
+        <span style="color: #f92672;">for</span> linha <span style="color: #f92672;">in</span> arquivo:
+            print(linha.strip()) <span style="color: #75715e;"># .strip() remove o '\n' do final</span>
+
+<span style="color: #75715e;"># 2. Captura o erro se o arquivo não existir</span>
+<span style="color: #f92672;">except</span> FileNotFoundError:
+    print("ERRO: O arquivo 'meu_arquivo.txt' não foi encontrado.")
+<span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+    print(f"Ocorreu um erro inesperado: {e}")</code></pre>
+
+        </section>
+
+        <section id="exercicios">
+            <h2>6. Exercícios Resolvidos</h2>
+            
+            <article class="exercicio-resolvido" id="ex1">
+                <h3>Exercício 1: Média com <code>while</code> (Condição de Parada/Flag)</h3>
+                <p class="enunciado">
+                    Crie um programa que solicite ao usuário a digitação de números inteiros. O programa deve parar quando o usuário digitar 0 (zero). No final, o programa deve exibir a média dos números digitados (excluindo o zero).
+                </p>
+                <pre><code><span style="color: #75715e;"># Inicializa as variáveis de controle</span>
+soma_total = 0
+contador = 0
+
+print("Digite números para calcular a média (Digite 0 para sair):")
+
+<span style="color: #f92672;">while</span> True:
+    <span style="color: #f92672;">try</span>:
+        numero = int(input(f"Digite o {contador + 1}º número: "))
+    <span style="color: #f92672;">except</span>:
+        print("Valor inválido. Digite um número inteiro.")
+        <span style="color: #f92672;">continue</span> <span style="color: #75715e;"># Pula para a próxima iteração</span>
+
+    <span style="color: #75715e;"># Verifica a condição de parada (flag)</span>
+    <span style="color: #f92672;">if</span> numero == 0:
+        <span style="color: #f92672;">break</span>  <span style="color: #75715e;"># Encerra o laço 'while'</span>
+    
+    soma_total += numero
+    contador += 1
+
+<span style="color: #f92672;">if</span> contador > 0:
+    media = soma_total / contador
+    print(f"\nA média dos {contador} números foi: {media}")
+<span style="color: #f92672;">else</span>:
+    print("\nNenhum número foi digitado (além do 0).")
+</code></pre>
+            </article>
+            
+            <article class="exercicio-resolvido" id="ex2">
+                <h3>Exercício 2: Iterando em Listas com <code>for</code> (Maior Valor)</h3>
+                <p class="enunciado">
+                    Considere uma lista de compras, onde cada item é uma sub-lista contendo o nome do cliente e o valor da compra. Crie um programa que encontre e imprima o nome do cliente que fez a maior compra e o valor dela.
+                </p>
+                <pre><code>compras = [ 
+    ["Ana", 150.75],
+    ["Bruno", 520.00],
+    ["Carla", 95.50],
+    ["Daniel", 890.99],
+    ["Elisa", 320.00]
+]
+
+<span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> compras: <span style="color: #75715e;"># Verifica se a lista não está vazia</span>
+    print("Lista de compras vazia.")
+<span style="color: #f92672;">else</span>:
+    maior_valor = compras[0][1]
+    cliente_maior_compra = compras[0][0]
+
+    <span style="color: #f92672;">for</span> nome_cliente, valor_compra <span style="color: #f92672;">in</span> compras:
+        <span style="color: #f92672;">if</span> valor_compra > maior_valor:
+            maior_valor = valor_compra
+            cliente_maior_compra = nome_cliente
+
+    print(f"Valor da maior compra: R$ {maior_valor}; cliente: {cliente_maior_compra}")
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex3">
+                <h3>Exercício 3: Funções e Matrizes (Cidades do Tocantins)</h3>
+                <p class="enunciado">
+                    (Baseado no Exercício 3 da pág. 91 do PDF) Crie um programa com um menu interativo que utilize três funções: <code>imprimir_cidades()</code>, <code>verificar_data(ano)</code> e <code>acrescentar_cidade()</code>, usando a lista de cidades global.
+                </p>
+                <pre><code>cidades = [ 
+    ["Paraiso", 1963], ["Gurupi", 1958], ["Palmas", 1989], ["Miranorte", 1964] 
+]
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">imprimir_cidades</span>():
+    print("\n--- Lista de Cidades ---")
+    <span style="color: #f92672;">for</span> nome, ano <span style="color: #f92672;">in</span> cidades:
+        print(f"Cidade: {nome}; Ano de criação: {ano}")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">verificar_data</span>(ano_usuario):
+    print(f"\n--- Verificando ano: {ano_usuario} ---")
+    <span style="color: #f92672;">for</span> nome, ano_criacao <span style="color: #f92672;">in</span> cidades:
+        <span style="color: #f92672;">if</span> ano_criacao < ano_usuario:
+            print(f"A cidade de {nome} foi criada ANTES de {ano_usuario}")
+        <span style="color: #f92672;">elif</span> ano_criacao > ano_usuario:
+            print(f"A cidade de {nome} foi criada DEPOIS de {ano_usuario}")
+        <span style="color: #f92672;">else</span>:
+            print(f"A cidade de {nome} foi criada EXATAMENTE em {ano_usuario}")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">acrescentar_cidade</span>():
+    print("\n--- Adicionar Nova Cidade ---")
+    nome = input("Digite o nome da nova cidade: ")
+    <span style="color: #f92672;">try</span>:
+        ano = int(input(f"Digite o ano de fundação de {nome}: "))
+        cidades.append([nome, ano])
+        print(f"Cidade {nome} ({ano}) adicionada com sucesso!")
+    <span style="color: #f92672;">except</span>:
+        print("Ano inválido. Operação cancelada.")
+
+<span style="color: #75715e;"># --- Programa Principal (Menu) ---</span>
+<span style="color: #f92672;">while</span> True:
+    print("\n--- MENU CIDADES (1: Listar, 2: Verificar Ano, 3: Adicionar, 0: Sair) ---")
+    opcao = input("Escolha uma opção: ")
+    
+    <span style="color: #f92672;">if</span> opcao == "1":
+        imprimir_cidades()
+    <span style="color: #f92672;">elif</span> opcao == "2":
+        <span style="color: #f92672;">try</span>:
+            ano_teste = int(input("Digite o ano para comparar: "))
+            verificar_data(ano_teste)
+        <span style="color: #f92672;">except</span>:
+            print("Ano inválido.")
+    <span style="color: #f92672;">elif</span> opcao == "3":
+        acrescentar_cidade()
+    <span style="color: #f92672;">elif</span> opcao == "0":
+        print("Saindo...")
+        <span style="color: #f92672;">break</span>
+    <span style="color: #f92672;">else</span>:
+        print("Opção inválida.")
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex4">
+                <h3>Exercício 4: Dicionário Alinhado (Lista de Dicionários)</h3>
+                <p class="enunciado">
+                    Crie um sistema de cadastro de alunos. O sistema deve armazenar os alunos em uma <strong>lista de dicionários</strong>. Cada aluno (dicionário) deve ter: "nome", "matricula" e "notas" (uma lista de floats). Crie funções para:
+                    <br>1. Adicionar um novo aluno.
+                    <br>2. Listar todos os alunos.
+                    <br>3. Calcular e exibir a média de um aluno específico (buscando pela matrícula).
+                </p>
+                <pre><code><span style="color: #75715e;"># Estrutura de dados principal: Lista de Dicionários</span>
+cadastro_alunos = [
+    {
+        "nome": "Ana Silva",
+        "matricula": "1001",
+        "notas": [8.5, 9.0, 10.0]
+    },
+    {
+        "nome": "Bruno Costa",
+        "matricula": "1002",
+        "notas": [6.0, 7.5, 5.0]
+    }
+]
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">adicionar_aluno</span>():
+    print("\n--- Adicionar Aluno ---")
+    nome = input("Nome do aluno: ")
+    matricula = input("Matrícula: ")
+    
+    <span style="color: #75715e;"># Validação de notas</span>
+    notas = []
+    <span style="color: #f92672;">try</span>:
+        n1 = float(input("Nota 1: "))
+        n2 = float(input("Nota 2: "))
+        n3 = float(input("Nota 3: "))
+        notas = [n1, n2, n3]
+    <span style="color: #f92672;">except</span>:
+        print("Erro nas notas. Operação cancelada.")
+        <span style="color: #f92672;">return</span>
+
+    <span style="color: #75715e;"># Cria o novo dicionário do aluno</span>
+    novo_aluno = {
+        "nome": nome,
+        "matricula": matricula,
+        "notas": notas
+    }
+    <span style="color: #75715e;"># Adiciona o dicionário à lista principal</span>
+    cadastro_alunos.append(novo_aluno)
+    print(f"Aluno {nome} adicionado com sucesso!")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">listar_alunos</span>():
+    print("\n--- Lista de Alunos ---")
+    <span style="color: #f92672;">for</span> aluno <span style="color: #f92672;">in</span> cadastro_alunos:
+        <span style="color: #75715e;"># Itera sobre a lista de dicionários</span>
+        print(f"Nome: {aluno['nome']} (Mat: {aluno['matricula']})")
+        print(f"  Notas: {aluno['notas']}")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">calcular_media_aluno</span>():
+    print("\n--- Calcular Média ---")
+    matricula_busca = input("Digite a matrícula do aluno: ")
+    
+    aluno_encontrado = <span style="color: #f92672;">None</span>
+    <span style="color: #75715e;"># Procura o aluno na lista</span>
+    <span style="color: #f92672;">for</span> aluno <span style="color: #f92672;">in</span> cadastro_alunos:
+        <span style="color: #f92672;">if</span> aluno["matricula"] == matricula_busca:
+            aluno_encontrado = aluno
+            <span style="color: #f92672;">break</span> <span style="color: #75715e;"># Para o 'for' assim que achar</span>
+    
+    <span style="color: #f92672;">if</span> aluno_encontrado:
+        nome = aluno_encontrado["nome"]
+        notas = aluno_encontrado["notas"] <span style="color: #75715e;"># Pega a lista de notas</span>
+        media = sum(notas) / len(notas)
+        print(f"A média do aluno {nome} é: {media:.2f}")
+    <span style="color: #f92672;">else</span>:
+        print(f"Erro: Aluno com matrícula {matricula_busca} não encontrado.")
+
+<span style="color: #75715e;"># --- Programa Principal (Menu) ---</span>
+<span style="color: #f92672;">while</span> True:
+    print("\n--- CADASTRO (1: Listar, 2: Adicionar, 3: Média, 0: Sair) ---")
+    opcao = input("Escolha uma opção: ")
+    
+    <span style="color: #f92672;">if</span> opcao == "1":
+        listar_alunos()
+    <span style="color: #f92672;">elif</span> opcao == "2":
+        adicionar_aluno()
+    <span style="color: #f92672;">elif</span> opcao == "3":
+        calcular_media_aluno()
+    <span style="color: #f92672;">elif</span> opcao == "0":
+        print("Saindo...")
+        <span style="color: #f92672;">break</span>
+    <span style="color: #f92672;">else</span>:
+        print("Opção inválida.")
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex5">
+                <h3>Exercício 5: Manipulação de Arquivo (Salvar e Ler)</h3>
+                <p class="enunciado">
+                    Crie um programa com duas funções:
+                    <br>1. <code>salvar_cidades_arquivo(lista_cidades)</code>: Recebe uma lista (matriz) de cidades e a salva em um arquivo <code>cidades.txt</code>. Cada sub-lista deve virar uma linha no arquivo, com os dados separados por vírgula (formato CSV simples).
+                    <br>2. <code>ler_cidades_arquivo()</code>: Lê o arquivo <code>cidades.txt</code>, o reconstrói na memória e o imprime no console.
+                </p>
+                <pre><code><span style="color: #75715e;"># Dados iniciais</span>
+cidades_para_salvar = [ 
+    ["Paraiso", 1963],
+    ["Gurupi", 1958],
+    ["Palmas", 1989]
+]
+
+NOME_ARQUIVO = "cidades_tocantins.txt"
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">salvar_cidades_arquivo</span>(lista_cidades):
+    print(f"\nTentando salvar {len(lista_cidades)} cidades em '{NOME_ARQUIVO}'...")
+    <span style="color: #f92672;">try</span>:
+        <span style="color: #f92672;">with</span> open(NOME_ARQUIVO, "w", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+            <span style="color: #f92672;">for</span> nome, ano <span style="color: #f92672;">in</span> lista_cidades:
+                <span style="color: #75715e;"># Formata a linha como: "Nome,Ano\n"</span>
+                linha = f"{nome},{ano}\n"
+                f.write(linha)
+        print("Arquivo salvo com sucesso!")
+    <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+        print(f"Erro ao salvar o arquivo: {e}")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">ler_cidades_arquivo</span>():
+    print(f"\nLendo dados do arquivo '{NOME_ARQUIVO}'...")
+    lista_lida = []
+    <span style="color: #f92672;">try</span>:
+        <span style="color: #f92672;">with</span> open(NOME_ARQUIVO, "r", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+            <span style="color: #f92672;">for</span> linha <span style="color: #f92672;">in</span> f:
+                <span style="color: #75715e;"># 1. Remove espaços/quebras de linha extras</span>
+                linha_limpa = linha.strip() <span style="color: #75715e;"># Ex: "Palmas,1989"</span>
+                
+                <span style="color: #75715e;"># 2. Divide a linha pela vírgula</span>
+                partes = linha_limpa.split(",") <span style="color: #75715e;"># Ex: ["Palmas", "1989"]</span>
+                
+                <span style="color: #75715e;"># 3. Reconstrói os dados (convertendo o ano para int)</span>
+                <span style="color: #f92672;">if</span> len(partes) == 2: <span style="color: #75715e;"># Garante que a linha não está mal formatada</span>
+                    nome = partes[0]
+                    ano = int(partes[1])
+                    lista_lida.append([nome, ano])
+        
+        <span style="color: #75715e;"># Imprime os dados lidos</span>
+        print("Dados lidos do arquivo:")
+        <span style="color: #f92672;">for</span> nome, ano <span style="color: #f92672;">in</span> lista_lida:
+            print(f"  - {nome} ({ano})")
+            
+    <span style="color: #f92672;">except</span> FileNotFoundError:
+        print(f"ERRO: O arquivo '{NOME_ARQUIVO}' não foi encontrado.")
+    <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+        print(f"Erro ao ler o arquivo: {e}")
+
+<span style="color: #75715e;"># --- Programa Principal ---</span>
+<span style="color: #75715e;"># 1. Salva os dados no arquivo</span>
+salvar_cidades_arquivo(cidades_para_salvar)
+
+<span style="color: #75715e;"># 2. Lê os dados de volta do arquivo</span>
+ler_cidades_arquivo()
+</code></pre>
+            </article>
+
+        </section>
+
+    </main>
+    
+</body>
+</html>
