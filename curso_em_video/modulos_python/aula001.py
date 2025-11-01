@@ -54,7 +54,7 @@ print(f"O número gerado foi {num}")
 lista = ['Ana', 'Bruno', 'Camila', 'Daniel']
 random.shuffle(lista) # Embaralha os elementos de uma lista
 print(f"A lista embaralhada foi {lista}")
-
+random.choice() #Ela sim retorna um item aleatório da lista.
 
 import emoji # Importa toda a Biblioteca de emojis
 from emoji import emojize # Importa apenas o elemento "emojize", ou seja, importa só o elemanto selecionado apos a tag Importe
