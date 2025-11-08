@@ -4,8 +4,8 @@ def mostrar_tabuleiro(tabuleiro):
 
     for lina in tabuleiro:
 
-        print(' | '.join(lina))
-        print('--+---+--')
+        print('\033[1;35m | \033[m'.join(lina))
+        print('\033[1;35m--+---+--\033[m')
 
 def verificar_vitoria(tabuleiro, jogador):
     
@@ -28,7 +28,7 @@ tabuleiro = [['1','2','3'],
              ['4','5','6'],
              ['7','8','9']]
 
-jogador_atual = 'X'
+jogador_atual = '\033[1;33mX\033[m'
 
 for rodada in range(9):
 
@@ -41,7 +41,7 @@ for rodada in range(9):
         linha, coluna = posicao // 3, posicao % 3
 
 
-        if tabuleiro[linha][coluna] in ['X', 'O']:
+        if tabuleiro[linha][coluna] in ['\033[1;33mX\033[m', '\033[1;36mO\033[m']:
 
             print('Posição já ocupada. Tente outra posição!')
 
@@ -56,14 +56,14 @@ for rodada in range(9):
 
             break
 
-        if jogador_atual == 'O':
-            jogador_atual = 'X'
+        if jogador_atual == '\033[1;36mO\033[m':
+            jogador_atual = '\033[1;33mX\033[m'
         else:
-            jogador_atual = 'O'
+            jogador_atual = '\033[1;36mO\033[m'
 
     except ValueError:
 
-        print('Erro... Muitas tentativas invalidas!')
+        print('\033[1;31mErro... Muitas tentativas invalidas!\033[m')
         break
         
 
