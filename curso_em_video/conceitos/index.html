@@ -18,6 +18,7 @@
                 <li><a href="#estruturas-dados">Estruturas</a></li>
                 <li><a href="#funcoes">Funções</a></li>
                 <li><a href="#arquivos">Arquivos</a></li>
+                <li><a href="#pathlib">Caminhos (pathlib)</a></li>
                 <li><a href="#exercicios">Exercícios</a></li>
             </ul>
         </div>
@@ -25,7 +26,6 @@
 
     <main class="conteudo">
         <h1>Para Estudo</h1>
-        <p style="text-align: center; margin-top: -10px; color: #555;">Baseado no material da Prof. Kenia Parente Lopes Mendonça</p>
 
         <section id="revisao">
             <h2>1. Revisão de Algoritmos</h2>
@@ -44,6 +44,17 @@ print(nome, idade)
 <span style="color: #75715e;"># Exemplo 3: F-strings (Forma moderna de formatar)</span>
 <span style="color: #75715e;"># Coloque um 'f' antes das aspas e as variáveis entre {}</span>
 print(f"O nome da aluna é {nome} e sua idade é {idade}.")</code></pre>
+
+                <h4>Parâmetros Avançados (<code>sep</code> e <code>end</code>)</h4>
+                <p>Por padrão, `print()` separa os argumentos por espaço (`sep=' '`) e termina com uma quebra de linha (`end='\n'`). Isso pode ser alterado:</p>
+                <pre><code><span style="color: #75715e;"># Exemplo 4: Alterando o separador (sep)</span>
+print("maçã", "banana", "uva", sep=", ")
+<span style="color: #75715e;"># Saída: maçã, banana, uva</span>
+
+<span style="color: #75715e;"># Exemplo 5: Alterando o final (end)</span>
+print("Esta é a primeira linha...", end=" ")
+print("...e esta continua na mesma linha.")
+<span style="color: #75715e;"># Saída: Esta é a primeira linha... ...e esta continua na mesma linha.</span></code></pre>
             </article>
             
             <article id="variaveis">
@@ -183,6 +194,28 @@ print("Você digitou 0. Fim.")</code></pre>
 <span style="color: #f92672;">for</span> i <span style="color: #f92672;">in</span> range(1, 6):
     print(f"Contando: {i}")</code></pre>
             </article>
+
+            <article id="break-continue">
+                <h3>2.4 Controle de Laços (<code>break</code> e <code>continue</code>)</h3>
+                <p>Às vezes, precisamos de mais controle sobre a execução de um laço (<code>while</code> ou <code>for</code>).</p>
+                <ul>
+                    <li><strong><code>break</code>:</strong> Interrompe e encerra o laço *imediatamente*. O código continua após o bloco do laço. (Visto no Exercício 1).</li>
+                    <li><strong><code>continue</code>:</strong> Interrompe a iteração *atual* e pula para o início da *próxima* iteração do laço.</li>
+                </ul>
+                <pre><code><span style="color: #75715e;"># Exemplo de 'continue' (imprimir apenas números ímpares)</span>
+<span style="color: #f92672;">for</span> i <span style="color: #f92672;">in</span> range(1, 11): <span style="color: #75715e;"># Números de 1 a 10</span>
+    <span style="color: #f92672;">if</span> i % 2 == 0: <span style="color: #75715e;"># Se o número for par...</span>
+        <span style="color: #f92672;">continue</span>       <span style="color: #75715e;"># ...pule esta iteração (o 'print' abaixo não executa)</span>
+    print(i) <span style="color: #75715e;"># Saída: 1, 3, 5, 7, 9</span>
+
+<span style="color: #75715e;"># Exemplo de 'break' (encontrar o primeiro número divisível por 7)</span>
+<span style="color: #f92672;">for</span> i <span style="color: #f92672;">in</span> range(20, 100):
+    <span style="color: #f92672;">if</span> i % 7 == 0:
+        print(f"Encontrei o primeiro: {i}")
+        <span style="color: #f92672;">break</span> <span style="color: #75715e;"># Para o laço assim que achar</span>
+<span style="color: #75715e;"># Saída: Encontrei o primeiro: 21</span></code></pre>
+            </article>
+
         </section>
 
         <section id="estruturas-dados">
@@ -190,7 +223,7 @@ print("Você digitou 0. Fim.")</code></pre>
 
             <article id="listas">
                 <h3>3.1 Listas (Vetores Unidimensionais)</h3>
-                <p>Listas são coleções ordenadas e mutáveis de itens. Elas são o equivalente a "vetores" ou "arrays" em outras linguagens. São definidas por colchetes <code>[]</code>.</p>
+                <p>Listas são coleções ordenadas e <strong>mutáveis</strong> de itens. Elas são o equivalente a "vetores" ou "arrays" em outras linguagens. São definidas por colchetes <code>[]</code>.</p>
                 
                 <pre><code><span style="color: #75715e;"># 1. Criando uma lista</span>
 notas = [9.5, 7.0, 8.5, 10.0]
@@ -200,6 +233,7 @@ lista_vazia = []
 <span style="color: #75715e;"># 2. Acessando itens (índice começa em 0)</span>
 print(nomes[0])   <span style="color: #75715e;"># Saída: Ana</span>
 print(notas[2])   <span style="color: #75715e;"># Saída: 8.5</span>
+print(nomes[-1])  <span style="color: #75715e;"># Saída: Carla (Índice negativo pega do final)</span>
 
 <span style="color: #75715e;"># 3. Alterando um item</span>
 nomes[1] = "Bruno Costa"
@@ -219,8 +253,24 @@ print(f"A lista tem {tamanho} nomes.")
 <span style="color: #f92672;">for</span> nota <span style="color: #f92672;">in</span> notas:
     print(nota)
 </code></pre>
-            </article>
             
+                <h4>Fatiamento (Slicing)</h4>
+                <p>É possível pegar "fatias" (sub-listas) de uma lista usando a sintaxe <code>lista[inicio:fim:passo]</code>.</p>
+                <pre><code>numeros = [10, 20, 30, 40, 50, 60]
+
+<span style="color: #75715e;"># Pega do índice 1 (20) ATÉ o índice 4 (que é o 50), sem incluí-lo</span>
+fatia1 = numeros[1:4]
+print(fatia1) <span style="color: #75715e;"># Saída: [20, 30, 40]</span>
+
+<span style="color: #75715e;"># Pega do início ATÉ o índice 3 (sem incluí-lo)</span>
+fatia2 = numeros[:3]
+print(fatia2) <span style="color: #75715e;"># Saída: [10, 20, 30]</span>
+
+<span style="color: #75715e;"># Pega do índice 2 ATÉ o final</span>
+fatia3 = numeros[2:]
+print(fatia3) <span style="color: #75715e;"># Saída: [30, 40, 50, 60]</span></code></pre>
+            </article>
+
             <article id="matrizes">
                 <h3>3.2 Listas (Matrizes Bidimensionais)</h3>
                 <p>Matrizes em Python são simplesmente "listas dentro de listas".</p>
@@ -280,6 +330,50 @@ aluno["curso"] = "Sistemas de Informação" <span style="color: #75715e;"># Adic
 <span style="color: #75715e;"># ...etc</span>
 </code></pre>
             </article>
+
+            <article id="tuplas">
+                <h3>3.4 Tuplas (<code>tuple</code>)</h3>
+                <p>Tuplas são coleções ordenadas e <strong>imutáveis</strong>. Uma vez criadas, não podem ser alteradas (não pode adicionar, remover ou modificar itens). São definidas por parênteses <code>()</code>.</p>
+                <p>São úteis para dados que não devem mudar, como coordenadas geográficas, datas ou chaves de dicionário compostas.</p>
+                <pre><code><span style="color: #75715e;"># 1. Criando uma tupla</span>
+coordenadas = (10.183, -48.333) <span style="color: #75715e;"># (Latitude, Longitude de Palmas)</span>
+dias_semana = ("Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom")
+
+<span style="color: #75715e;"># 2. Acessando valores (igual à lista)</span>
+print(dias_semana[0]) <span style="color: #75715e;"># Saída: Seg</span>
+print(coordenadas[1]) <span style="color: #75715e;"># Saída: -48.333</span>
+
+<span style="color: #75715e;"># 3. Tentativa de alteração (GERA ERRO!)</span>
+<span style="color: #75715e;"># dias_semana[0] = "Segunda"  # TypeError: 'tuple' object does not support item assignment</span>
+
+<span style="color: #75715e;"># 4. Desempacotamento (muito comum)</span>
+lat, lon = coordenadas
+print(f"Latitude: {lat}")</code></pre>
+            </article>
+
+            <article id="sets">
+                <h3>3.5 Conjuntos (<code>set</code>)</h3>
+                <p>Conjuntos são coleções <strong>não ordenadas</strong> de itens <strong>únicos</strong> (sem duplicatas). São definidos por chaves <code>{}</code>, mas sem pares chave-valor.</p>
+                <p>Seu principal uso é remover duplicatas de uma lista e realizar operações matemáticas de conjuntos (união, interseção, etc.).</p>
+                <pre><code><span style="color: #75715e;"># 1. Criando um set (duplicatas são removidas)</span>
+numeros = {1, 2, 3, 2, 3, 4, 5, 1}
+print(numeros) <span style="color: #75715e;"># Saída: {1, 2, 3, 4, 5} (ordem pode variar)</span>
+
+<span style="color: #75715e;"># 2. Criando um set a partir de uma lista (remove duplicatas)</span>
+lista_compras = ["Maçã", "Banana", "Maçã", "Laranja", "Banana"]
+lista_unica = list(set(lista_compras))
+print(lista_unica) <span style="color: #75715e;"># Saída: ['Maçã', 'Banana', 'Laranja'] (ordem pode variar)</span>
+
+<span style="color: #75715e;"># 3. Adicionando e Removendo</span>
+numeros.add(6)  <span style="color: #75715e;"># Adiciona o 6</span>
+numeros.add(2)  <span style="color: #75715e;"># Tenta adicionar o 2 (nada acontece, já existe)</span>
+numeros.remove(1) <span style="color: #75715e;"># Remove o 1</span>
+print(numeros) <span style="color: #75715e;"># Saída: {2, 3, 4, 5, 6}</span>
+
+<span style="color: #75715e;"># 4. Verificando pertinência (muito rápido)</span>
+print(4 <span style="color: #f92672;">in</span> numeros) <span style="color: #75715e;"># Saída: True</span></code></pre>
+            </article>
+
         </section>
 
         <section id="funcoes">
@@ -306,36 +400,68 @@ saudacao("Ana")  <span style="color: #75715e;"># Chama a função, que vai impri
 valor_soma = somar(10, 5) <span style="color: #75715e;"># Chama a função e armazena o retorno</span>
 print(f"O resultado da soma é {valor_soma}") <span style="color: #75715e;"># Saída: 15</span>
 </code></pre>
+
+            <article id="parametros-avancados">
+                <h3>4.1 Parâmetros Opcionais e Type Hints</h3>
+                
+                <h4>Valores Padrão (Opcionais)</h4>
+                <p>Você pode definir um valor padrão para um parâmetro, tornando-o opcional na chamada da função.</p>
+                <pre><code><span style="color: #75715e;"># 'saud' é um parâmetro opcional com valor padrão "Olá"</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">saudacao_avancada</span>(nome, saud="Olá"):
+    print(f"{saud}, {nome}!")
+
+<span style="color: #75715e;"># Chamando sem o parâmetro opcional</span>
+saudacao_avancada("Bruno") <span style="color: #75715e;"># Saída: Olá, Bruno!</span>
+
+<span style="color: #75715e;"># Chamando e especificando o parâmetro opcional</span>
+saudacao_avancada("Carla", saud="Oi") <span style="color: #75715e;"># Saída: Oi, Carla!</span></code></pre>
+                
+                <h4>Type Hints (Dicas de Tipo)</h4>
+                <p>Python permite "anotar" os tipos esperados para parâmetros e para o valor de retorno. <strong>Isso não é obrigatório e não gera erro</strong>, mas ajuda muito na leitura e documentação do código.</p>
+                <pre><code><span style="color: #75715e;"># (a: int, b: int) -> int</span>
+<span style="color: #75715e;"># Diz que 'a' e 'b' deveriam ser inteiros, e a função deve retornar um inteiro</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">multiplicar</span>(a: int, b: int) -> int:
+    <span style="color: #f92672;">return</span> a * b
+
+<span style="color: #75715e;"># (nome: str) -> None</span>
+<span style="color: #75715e;"># Diz que 'nome' deveria ser string, e a função não retorna nada (None)</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">imprimir_nome</span>(nome: str) -> None:
+    print(f"Nome: {nome}")
+
+<span style="color: #75715e;"># (lista_notas: list) -> float</span>
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">calcular_media</span>(lista_notas: list) -> float:
+    <span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> lista_notas:
+        <span style="color: #f92672;">return</span> 0.0
+    <span style="color: #f92672;">return</span> sum(lista_notas) / len(lista_notas)
+</code></pre>
+            </article>
+
         </section>
 
         <section id="arquivos">
             <h2>5. Manipulação de Arquivos (I/O)</h2>
-            <p>Python pode ler e escrever em arquivos de texto (<code>.txt</code>, <code>.csv</code>, etc.) de forma simples.</p>
-            <p>A forma mais segura de fazer isso é com o gerenciador de contexto <code>with open()</code>, que garante que o arquivo será fechado automaticamente, mesmo se ocorrer um erro.</p>
+            <p>Python pode ler e escrever em arquivos de texto (<code>.txt</code>, <code>.csv</code>, etc.) de forma simples. A forma mais segura de fazer isso é com o gerenciador de contexto <code>with open()</code>, que garante que o arquivo será fechado automaticamente, mesmo se ocorrer um erro.</p>
+            <p>Iremos explorar os modos de abertura, como navegar dentro de um arquivo e como lidar com dados estruturados (CSV/JSON).</p>
 
-            <h3>Escrevendo em um Arquivo (<code>'w'</code> e <code>'a'</code>)</h3>
-            <ul>
-                <li><strong>Modo <code>'w'</code> (write - escrita):</strong> Cria um novo arquivo (ou apaga um existente) e escreve conteúdo nele.</li>
-                <li><strong>Modo <code>'a'</code> (append - anexar):</strong> Adiciona conteúdo ao final de um arquivo existente, sem apagar o que já estava lá.</li>
-            </ul>
-            <pre><code>dados = "Esta é a primeira linha.\nEsta é a segunda linha.\n"
-
-<span style="color: #75715e;"># 1. Escrevendo (Modo 'w' - apaga o anterior)</span>
+            <h3>Modos de Abertura Básicos (<code>'w'</code>, <code>'a'</code>, <code>'r'</code>)</h3>
+            
+            <h4>Escrevendo (<code>'w'</code> - Write)</h4>
+            <p>Cria um novo arquivo (ou <strong>apaga totalmente</strong> um existente) e escreve conteúdo nele. O "cursor" começa no início.</p>
+            <pre><code><span style="color: #75715e;"># 1. Escrevendo (Modo 'w' - apaga o anterior)</span>
 <span style="color: #f92672;">with</span> open("meu_arquivo.txt", "w", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
-    arquivo.write(dados)
+    arquivo.write("Esta é a primeira linha.\n")
+    arquivo.write("Esta é a segunda linha.\n")
+</code></pre>
 
-<span style="color: #75715e;"># 2. Anexando (Modo 'a' - adiciona ao final)</span>
+            <h4>Anexando (<code>'a'</code> - Append)</h4>
+            <p>Adiciona conteúdo ao <strong>final</strong> de um arquivo existente, sem apagar o que já estava lá. Se o arquivo não existir, ele é criado.</p>
+            <pre><code><span style="color: #75715e;"># 2. Anexando (Modo 'a' - adiciona ao final)</span>
 <span style="color: #f92672;">with</span> open("meu_arquivo.txt", "a", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
-    arquivo.write("Esta linha foi anexada.\n")</code></pre>
+    arquivo.write("Esta linha foi anexada.\n")
+</code></pre>
 
-            <h3>Lendo de um Arquivo (<code>'r'</code>)</h3>
-            <p>O <strong>Modo <code>'r'</code> (read - leitura)</strong> é usado para ler o conteúdo de um arquivo.</p>
-            <ul>
-                <li><code>.read()</code>: Lê o arquivo inteiro como uma única string.</li>
-                <li><code>.readline()</code>: Lê apenas a próxima linha.</li>
-                <li><code>.readlines()</code>: Lê todas as linhas e as retorna como uma lista de strings.</li>
-            </ul>
-
+            <h4>Lendo (<code>'r'</code> - Read)</h4>
+            <p>O <strong>Modo <code>'r'</code></strong> é usado para ler o conteúdo de um arquivo. Este é o modo padrão (se você omitir o modo, Python usa <code>'r'</code>). Gera um erro (`FileNotFoundError`) se o arquivo não existir.</p>
             <pre><code><span style="color: #75715e;"># 1. Tenta abrir o arquivo para leitura</span>
 <span style="color: #f92672;">try</span>:
     <span style="color: #f92672;">with</span> open("meu_arquivo.txt", "r", encoding="utf-8") <span style="color: #f92672;">as</span> arquivo:
@@ -352,16 +478,198 @@ print(f"O resultado da soma é {valor_soma}") <span style="color: #75715e;"># Sa
         <span style="color: #f92672;">for</span> linha <span style="color: #f92672;">in</span> arquivo:
             print(linha.strip()) <span style="color: #75715e;"># .strip() remove o '\n' do final</span>
 
-<span style="color: #75715e;"># 2. Captura o erro se o arquivo não existir</span>
 <span style="color: #f92672;">except</span> FileNotFoundError:
     print("ERRO: O arquivo 'meu_arquivo.txt' não foi encontrado.")
 <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
-    print(f"Ocorreu um erro inesperado: {e}")</code></pre>
+    print(f"Ocorreu um erro inesperado: {e}")
+</code></pre>
+
+            <article id="modos-avancados">
+                <h3>5.1 Modos de Abertura Avançados (<code>+</code> e <code>b</code>)</h3>
+                <p>Podemos combinar os modos básicos para obter mais controle.</p>
+                
+                <h4>Modos de Leitura e Escrita (<code>+</code>)</h4>
+                <p>O <code>+</code> permite que o arquivo seja lido E escrito.</p>
+                <ul>
+                    <li><strong><code>r+</code> (Leitura + Escrita):</strong> Abre um arquivo existente para ler e escrever. O cursor começa no início. (Gera erro se o arquivo não existir).</li>
+                    <li><strong><code>w+</code> (Escrita + Leitura):</strong> Cria/Trunca um arquivo para escrever e ler. O cursor começa no início.</li>
+                    <li><strong><code>a+</code> (Anexar + Leitura):</strong> Abre um arquivo para anexar (escrita começa no final) e ler. O cursor de *leitura* começa no início.</li>
+                </ul>
+                <pre><code><span style="color: #75715e;"># Exemplo de 'r+' (ler e depois sobrescrever o início)</span>
+<span style="color: #f92672;">with</span> open("meu_arquivo.txt", "r+", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+    <span style="color: #75715e;"># 1. Lê o conteúdo</span>
+    conteudo = f.read()
+    print(f"Conteúdo original: {conteudo.strip()}")
+    
+    <span style="color: #75715e;"># 2. Volta ao início (veremos 'seek' em breve)</span>
+    f.seek(0) 
+    
+    <span style="color: #75715e;"># 3. Escreve por cima do início</span>
+    f.write("[SOBRESCRITO]")
+    <span style="color: #75715e;"># O resto do arquivo original pode permanecer, dependendo do tamanho da escrita</span>
+</code></pre>
+
+                <h4>Modo Binário (<code>b</code>)</h4>
+                <p>Até agora, lidamos com arquivos de texto (usando <code>encoding="utf-8"</code>). Para manipular arquivos que não são texto (como imagens, PDFs, arquivos <code>.exe</code>, etc.), você DEVE usar o modo binário, adicionando <code>b</code>.</p>
+                <p>Em modo binário, você lê e escreve <code>bytes</code>, não <code>str</code>.</p>
+                <ul>
+                    <li><strong><code>rb</code>:</strong> Ler binário.</li>
+                    <li><strong><code>wb</code>:</strong> Escrever binário.</li>
+                </ul>
+                <pre><code><span style="color: #75715e;"># Exemplo de cópia de uma imagem (leitura binária + escrita binária)</span>
+<span style="color: #f92672;">try</span>:
+    <span style="color: #f92672;">with</span> open("logo.png", "rb") <span style="color: #f92672;">as</span> original:
+        dados_binarios = original.read() <span style="color: #75715e;"># dados_binarios é do tipo 'bytes'</span>
+    
+    <span style="color: #f92672;">with</span> open("copia_logo.png", "wb") <span style="color: #f92672;">as</span> copia:
+        copia.write(dados_binarios)
+    
+    print("Imagem copiada com sucesso!")
+<span style="color: #f92672;">except</span> FileNotFoundError:
+    print("Erro: Arquivo 'logo.png' não encontrado para cópia.")
+</code></pre>
+            </article>
+
+            <article id="seek-tell">
+                <h3>5.2 Navegando no Arquivo (<code>seek</code> e <code>tell</code>)</h3>
+                <p>Ao abrir um arquivo, o Python mantém um "cursor" (ponteiro) que indica onde a próxima operação de leitura ou escrita ocorrerá.</p>
+                <ul>
+                    <li><strong><code>.tell()</code>:</strong> Retorna a posição atual (em bytes) do cursor no arquivo.</li>
+                    <li><strong><code>.seek(posicao)</code>:</strong> Move o cursor para a <code>posicao</code> (em bytes) especificada.</li>
+                </ul>
+                <pre><code><span style="color: #f92672;">with</span> open("meu_arquivo.txt", "r", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+    <span style="color: #75715e;"># 1. Posição inicial</span>
+    print(f.tell()) <span style="color: #75715e;"># Saída: 0 (início)</span>
+    
+    <span style="color: #75715e;"># 2. Lê os 10 primeiros caracteres (bytes, em UTF-8)</span>
+    primeiros_10 = f.read(10)
+    print(primeiros_10)
+    
+    <span style="color: #75715e;"># 3. Verifica a nova posição</span>
+    print(f.tell()) <span style="color: #75715e;"># Saída: 10 (ou mais, dependendo do encoding)</span>
+    
+    <span style="color: #75715e;"># 4. Volta ao início do arquivo</span>
+    f.seek(0)
+    print(f.tell()) <span style="color: #75715e;"># Saída: 0</span>
+    
+    <span style="color: #75715e;"># 5. Lê tudo de novo</span>
+    tudo = f.read()
+    print("Lendo tudo:", tudo.strip())
+</code></pre>
+            </article>
+
+            <article id="csv-json">
+                <h3>5.3 Lidando com Dados Estruturados (CSV e JSON)</h3>
+                <p>Embora possamos ler e escrever arquivos <code>.txt</code> manualmente (como no Exercício 5), para dados estruturados (como listas ou dicionários) é melhor usar os módulos padrões do Python.</p>
+                
+                <h4>Módulo <code>json</code> (Para Listas e Dicionários)</h4>
+                <p>JSON é um formato excelente para salvar estruturas de dados complexas.</p>
+                <pre><code><span style="color: #f92672;">import</span> json
+
+<span style="color: #75715e;"># Nossos dados (uma lista de dicionários)</span>
+alunos = [
+    {"nome": "Ana", "matricula": "1001"},
+    {"nome": "Bruno", "matricula": "1002"}
+]
+
+<span style="color: #75715e;"># 1. Salvando em JSON (modo 'w')</span>
+<span style="color: #f92672;">try</span>:
+    <span style="color: #f92672;">with</span> open("alunos.json", "w", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+        json.dump(alunos, f, indent=4) <span style="color: #75715e;"># 'indent=4' formata o arquivo</span>
+    print("Arquivo 'alunos.json' salvo.")
+
+    <span style="color: #75715e;"># 2. Lendo de JSON (modo 'r')</span>
+    <span style="color: #f92672;">with</span> open("alunos.json", "r", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+        dados_lidos = json.load(f)
+        print("Dados lidos do JSON:")
+        print(dados_lidos[0]["nome"]) <span style="color: #75715e;"># Saída: Ana</span>
+<span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+    print(f"Erro ao lidar com JSON: {e}")
+</code></pre>
+
+                <h4>Módulo <code>csv</code> (Para "Matrizes" / Planilhas)</h4>
+                <p>CSV (Comma-Separated Values) é um formato de planilha simples.</p>
+                <pre><code><span style="color: #f92672;">import</span> csv
+
+cidades = [ 
+    ["Paraiso", 1963],
+    ["Gurupi", 1958]
+]
+
+<span style="color: #75715e;"># 1. Salvando em CSV (modo 'w')</span>
+<span style="color: #f92672;">try</span>:
+    <span style="color: #f92672;">with</span> open("cidades.csv", "w", newline='', encoding="utf-8") <span style="color: #f92672;">as</span> f:
+        writer = csv.writer(f)
+        writer.writerow(["Cidade", "Ano"]) <span style="color: #75715e;"># Escreve o cabeçalho</span>
+        writer.writerows(cidades)        <span style="color: #75715e;"># Escreve todos os dados</span>
+    print("Arquivo 'cidades.csv' salvo.")
+
+    <span style="color: #75715e;"># 2. Lendo de CSV (modo 'r')</span>
+    <span style="color: #f92672;">with</span> open("cidades.csv", "r", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+        reader = csv.reader(f)
+        <span style="color: #f92672;">next</span>(reader) <span style="color: #75715e;"># Pula a linha do cabeçalho</span>
+        print("Dados lidos do CSV:")
+        <span style="color: #f92672;">for</span> linha <span style="color: #f92672;">in</span> reader:
+            print(f"  - {linha[0]} (Ano: {linha[1]})")
+<span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+    print(f"Erro ao lidar com CSV: {e}")
+</code></pre>
+            </article>
 
         </section>
 
+        <section id="pathlib">
+            <h2>6. Gerenciando Caminhos (<code>pathlib</code>)</h2>
+            <p>Lidar com arquivos envolve mais do que apenas ler e escrever; envolve gerenciar onde eles estão localizados. Lidar com caminhos de arquivos (ex: <code>"C:\Usuarios\..."</code> ou <code>"/home/..."</code>) pode ser complicado.</p>
+            <p>O módulo <code>pathlib</code> (incluído no Python 3.4+) é a forma moderna e orientada a objetos de lidar com caminhos de sistema de arquivos.</p>
+            
+            <pre><code><span style="color: #f92672;">from</span> pathlib <span style="color: #f92672;">import</span> Path
+
+<span style="color: #75715e;"># 1. Importe a classe 'Path'</span>
+<span style="color: #75715e;"># (Opcional) 'Path.cwd()' pega o diretório atual de trabalho (onde o script está)</span>
+diretorio_atual = Path.cwd()
+print(f"Estou rodando em: {diretorio_atual}")
+
+<span style="color: #75715e;"># 2. Criando um objeto Path para um arquivo</span>
+<span style="color: #75715e;"># Note que o 'pathlib' usa a barra '/' mesmo no Windows</span>
+caminho_arquivo = Path("meu_arquivo.txt")
+caminho_json = Path("dados/alunos.json") <span style="color: #75715e;"># Pode ser um subdiretório</span>
+
+<span style="color: #75715e;"># 3. Verificando informações do arquivo/caminho</span>
+print(f"O arquivo '{caminho_arquivo}' existe? {caminho_arquivo.exists()}")
+print(f"O caminho '{caminho_json}' existe? {caminho_json.exists()}")
+
+<span style="color: #75715e;"># 4. Criando diretórios</span>
+<span style="color: #75715e;"># Cria o diretório 'dados' se ele não existir</span>
+Path("dados").mkdir(exist_ok=True) 
+
+<span style="color: #75715e;"># 5. Usando 'pathlib' diretamente com 'open' (MUITO ÚTIL)</span>
+<span style="color: #75715e;"># Você não precisa converter para string, o 'open' entende o objeto Path</span>
+<span style="color: #f92672;">try</span>:
+    <span style="color: #f92672;">with</span> open(caminho_json, "r", encoding="utf-8") <span style="color: #f92672;">as</span> f:
+        print("Lendo JSON via pathlib...")
+<span style="color: #f92672;">except</span> FileNotFoundError:
+    print("O arquivo 'dados/alunos.json' ainda não foi criado.")
+
+<span style="color: #75715e;"># 6. Listando arquivos em um diretório (Glob)</span>
+print("\nListando todos os arquivos .txt no diretório atual:")
+<span style="color: #75715e;"># '*.txt' é um padrão "glob" (curinga)</span>
+<span style="color: #f92672;">for</span> arquivo_txt <span style="color: #f92672;">in</span> diretorio_atual.glob("*.txt"):
+    print(f"  - {arquivo_txt.name}") <span style="color: #75715e;"># .name dá apenas o nome do arquivo</span>
+
+<span style="color: #75715e;"># 7. Lendo e escrevendo texto rapidamente (Python 3.5+)</span>
+<span style="color: #f92672;">try</span>:
+    caminho_arquivo.write_text("Conteúdo rápido!", encoding="utf-8")
+    conteudo = caminho_arquivo.read_text(encoding="utf-8")
+    print(f"\nLido com read_text(): {conteudo}")
+<span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+    print(f"Erro com read/write_text: {e}")
+</code></pre>
+        </section>
+
+
         <section id="exercicios">
-            <h2>6. Exercícios Resolvidos</h2>
+            <h2>7. Exercícios Resolvidos</h2>
             
             <article class="exercicio-resolvido" id="ex1">
                 <h3>Exercício 1: Média com <code>while</code> (Condição de Parada/Flag)</h3>
@@ -412,6 +720,7 @@ print("Digite números para calcular a média (Digite 0 para sair):")
 <span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> compras: <span style="color: #75715e;"># Verifica se a lista não está vazia</span>
     print("Lista de compras vazia.")
 <span style="color: #f92672;">else</span>:
+    <span style="color: #75715e;"># Inicializa com o primeiro item</span>
     maior_valor = compras[0][1]
     cliente_maior_compra = compras[0][0]
 
@@ -429,7 +738,8 @@ print("Digite números para calcular a média (Digite 0 para sair):")
                 <p class="enunciado">
                     (Baseado no Exercício 3 da pág. 91 do PDF) Crie um programa com um menu interativo que utilize três funções: <code>imprimir_cidades()</code>, <code>verificar_data(ano)</code> e <code>acrescentar_cidade()</code>, usando a lista de cidades global.
                 </p>
-                <pre><code>cidades = [ 
+                <pre><code><span style="color: #75715e;"># Variável global (geralmente evitada, mas usada aqui pelo enunciado)</span>
+cidades = [ 
     ["Paraiso", 1963], ["Gurupi", 1958], ["Palmas", 1989], ["Miranorte", 1964] 
 ]
 
@@ -517,7 +827,7 @@ cadastro_alunos = [
         notas = [n1, n2, n3]
     <span style="color: #f92672;">except</span>:
         print("Erro nas notas. Operação cancelada.")
-        <span style="color: #f92672;">return</span>
+        <span style="color: #f92672;">return</span> <span style="color: #75715e;"># Sai da função</span>
 
     <span style="color: #75715e;"># Cria o novo dicionário do aluno</span>
     novo_aluno = {
@@ -531,6 +841,10 @@ cadastro_alunos = [
 
 <span style="color: #f92672;">def</span> <span style="color: #a6e22e;">listar_alunos</span>():
     print("\n--- Lista de Alunos ---")
+    <span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> cadastro_alunos:
+        print("Nenhum aluno cadastrado.")
+        <span style="color: #f92672;">return</span>
+        
     <span style="color: #f92672;">for</span> aluno <span style="color: #f92672;">in</span> cadastro_alunos:
         <span style="color: #75715e;"># Itera sobre a lista de dicionários</span>
         print(f"Nome: {aluno['nome']} (Mat: {aluno['matricula']})")
@@ -550,8 +864,12 @@ cadastro_alunos = [
     <span style="color: #f92672;">if</span> aluno_encontrado:
         nome = aluno_encontrado["nome"]
         notas = aluno_encontrado["notas"] <span style="color: #75715e;"># Pega a lista de notas</span>
-        media = sum(notas) / len(notas)
-        print(f"A média do aluno {nome} é: {media:.2f}")
+        
+        <span style="color: #f92672;">if</span> len(notas) > 0:
+            media = sum(notas) / len(notas)
+            print(f"A média do aluno {nome} é: {media:.2f}")
+        <span style="color: #f92672;">else</span>:
+            print(f"O aluno {nome} não possui notas cadastradas.")
     <span style="color: #f92672;">else</span>:
         print(f"Erro: Aluno com matrícula {matricula_busca} não encontrado.")
 
@@ -590,7 +908,7 @@ cidades_para_salvar = [
 
 NOME_ARQUIVO = "cidades_tocantins.txt"
 
-<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">salvar_cidades_arquivo</span>(lista_cidades):
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">salvar_cidades_arquivo</span>(lista_cidades: list):
     print(f"\nTentando salvar {len(lista_cidades)} cidades em '{NOME_ARQUIVO}'...")
     <span style="color: #f92672;">try</span>:
         <span style="color: #f92672;">with</span> open(NOME_ARQUIVO, "w", encoding="utf-8") <span style="color: #f92672;">as</span> f:
@@ -602,7 +920,7 @@ NOME_ARQUIVO = "cidades_tocantins.txt"
     <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
         print(f"Erro ao salvar o arquivo: {e}")
 
-<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">ler_cidades_arquivo</span>():
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">ler_cidades_arquivo</span>() -> list:
     print(f"\nLendo dados do arquivo '{NOME_ARQUIVO}'...")
     lista_lida = []
     <span style="color: #f92672;">try</span>:
@@ -610,6 +928,9 @@ NOME_ARQUIVO = "cidades_tocantins.txt"
             <span style="color: #f92672;">for</span> linha <span style="color: #f92672;">in</span> f:
                 <span style="color: #75715e;"># 1. Remove espaços/quebras de linha extras</span>
                 linha_limpa = linha.strip() <span style="color: #75715e;"># Ex: "Palmas,1989"</span>
+                
+                <span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> linha_limpa: <span style="color: #75715e;"># Pula linhas em branco</span>
+                    <span style="color: #f92672;">continue</span>
                 
                 <span style="color: #75715e;"># 2. Divide a linha pela vírgula</span>
                 partes = linha_limpa.split(",") <span style="color: #75715e;"># Ex: ["Palmas", "1989"]</span>
@@ -624,18 +945,147 @@ NOME_ARQUIVO = "cidades_tocantins.txt"
         print("Dados lidos do arquivo:")
         <span style="color: #f92672;">for</span> nome, ano <span style="color: #f92672;">in</span> lista_lida:
             print(f"  - {nome} ({ano})")
+        <span style="color: #f92672;">return</span> lista_lida
             
     <span style="color: #f92672;">except</span> FileNotFoundError:
         print(f"ERRO: O arquivo '{NOME_ARQUIVO}' não foi encontrado.")
     <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
         print(f"Erro ao ler o arquivo: {e}")
+    <span style="color: #f92672;">return</span> [] <span style="color: #75715e;"># Retorna lista vazia em caso de erro</span>
 
 <span style="color: #75715e;"># --- Programa Principal ---</span>
 <span style="color: #75715e;"># 1. Salva os dados no arquivo</span>
 salvar_cidades_arquivo(cidades_para_salvar)
 
 <span style="color: #75715e;"># 2. Lê os dados de volta do arquivo</span>
-ler_cidades_arquivo()
+dados_lidos = ler_cidades_arquivo()
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex6">
+                <h3>Exercício 6: Funções, Sets e Tuplas (Limpeza de Dados)</h3>
+                <p class="enunciado">
+                    Crie uma função <code>processar_lista(numeros)</code> que receba uma lista de inteiros (que pode conter duplicatas). A função deve remover todas as duplicatas e retornar uma <strong>tupla</strong> contendo os números únicos em <strong>ordem crescente</strong>.
+                </p>
+                <pre><code><span style="color: #f92672;">def</span> <span style="color: #a6e22e;">processar_lista</span>(numeros: list) -> tuple:
+    <span style="color: #75715e;"># 1. Converte a lista para um set (isso remove as duplicatas)</span>
+    numeros_unicos_set = set(numeros)
+    
+    <span style="color: #75715e;"># 2. Converte o set de volta para uma lista para poder ordenar</span>
+    lista_ordenada = sorted(list(numeros_unicos_set))
+    
+    <span style="color: #75715e;"># 3. Converte a lista ordenada para uma tupla e a retorna</span>
+    <span style="color: #f92672;">return</span> tuple(lista_ordenada)
+
+<span style="color: #75715e;"># --- Programa Principal ---</span>
+entrada = [1, 5, 2, 2, 8, 10, 5, 1, 3, 10]
+print(f"Lista de entrada: {entrada}")
+
+saida_tupla = processar_lista(entrada)
+
+print(f"Tupla de saída (únicos e ordenados): {saida_tupla}")
+<span style="color: #75715e;"># Saída: Tupla de saída (únicos e ordenados): (1, 2, 3, 5, 8, 10)</span>
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex7">
+                <h3>Exercício 7: Dicionários e Strings (Contador de Palavras)</h3>
+                <p class="enunciado">
+                    Crie uma função <code>contar_palavras(texto)</code> que receba uma string (frase ou parágrafo). A função deve:
+                    <br>1. Converter todo o texto para minúsculas.
+                    <br>2. Remover pontuações simples (apenas <code>.</code> e <code>,</code>).
+                    <br>3. Retornar um <strong>dicionário</strong> onde cada chave é uma palavra e seu valor é o número de vezes que ela apareceu.
+                </p>
+                <pre><code><span style="color: #f92672;">def</span> <span style="color: #a6e22e;">contar_palavras</span>(texto: str) -> dict:
+    <span style="color: #75715e;"># 1. Converte para minúsculas</span>
+    texto_limpo = texto.lower()
+    
+    <span style="color: #75715e;"># 2. Remove pontuação</span>
+    texto_limpo = texto_limpo.replace(",", "")
+    texto_limpo = texto_limpo.replace(".", "")
+    
+    <span style="color: #75715e;"># 3. Quebra a string em uma lista de palavras</span>
+    palavras = texto_limpo.split() <span style="color: #75715e;"># split() sem argumento divide por espaços</span>
+    
+    <span style="color: #75715e;"># 4. Cria o dicionário de frequência</span>
+    frequencia = {}
+    
+    <span style="color: #f92672;">for</span> palavra <span style="color: #f92672;">in</span> palavras:
+        <span style="color: #75715e;"># Pega o valor atual (ou 0 se a chave não existir) e soma 1</span>
+        frequencia[palavra] = frequencia.get(palavra, 0) + 1
+            
+    <span style="color: #f92672;">return</span> frequencia
+
+<span style="color: #75715e;"># --- Programa Principal ---</span>
+texto_exemplo = "Olá mundo, este é um teste. Olá de novo, mundo."
+contagem = contar_palavras(texto_exemplo)
+
+print(f"Texto: '{texto_exemplo}'")
+print("Contagem de palavras:")
+print(contagem)
+<span style="color: #75715e;"># Saída:</span>
+<span style="color: #75715e;"># {'olá': 2, 'mundo': 2, 'este': 1, 'é': 1, 'um': 1, 'teste': 1, 'de': 1, 'novo': 1}</span>
+</code></pre>
+            </article>
+
+            <article class="exercicio-resolvido" id="ex8">
+                <h3>Exercício 8: <code>pathlib</code> e Leitura (Consolidador de Relatórios)</h3>
+                <p class="enunciado">
+                    Suponha que você tenha um diretório chamado <code>relatorios/</code> e dentro dele vários arquivos <code>.txt</code> (<code>dia1.txt</code>, <code>dia2.txt</code>, ...). Crie um programa que:
+                    <br>1. Use <code>pathlib</code> para garantir que o diretório <code>relatorios/</code> exista (e o crie, se necessário).
+                    <br>2. (Para fins de teste) Crie 2 arquivos de exemplo dentro dele (<code>dia1.txt</code> e <code>dia2.txt</code>).
+                    <br>3. Use <code>pathlib.glob()</code> para encontrar todos os arquivos <code>.txt</code> dentro de <code>relatorios/</code>.
+                    <br>4. Leia o conteúdo de cada um desses arquivos e o junte em um único arquivo chamado <code>relatorio_completo.txt</code>.
+                </p>
+                <pre><code><span style="color: #f92672;">from</span> pathlib <span style="color: #f92672;">import</span> Path
+
+<span style="color: #75715e;"># Define o nome do diretório e do arquivo final</span>
+DIRETORIO_RELATORIOS = Path("relatorios")
+ARQUIVO_FINAL = Path("relatorio_completo.txt")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">preparar_ambiente_teste</span>():
+    print(f"1. Garantindo que o diretório '{DIRETORIO_RELATORIOS}' exista...")
+    DIRETORIO_RELATORIOS.mkdir(exist_ok=True)
+    
+    <span style="color: #75715e;"># Cria arquivos de exemplo</span>
+    (DIRETORIO_RELATORIOS / "dia1.txt").write_text("Relatório do Dia 1: Tudo OK.\n", encoding="utf-8")
+    (DIRETORIO_RELATORIOS / "dia2.txt").write_text("Relatório do Dia 2: Pequeno incidente.\n", encoding="utf-8")
+    (DIRETORIO_RELATORIOS / "config.ini").write_text("admin=true", encoding="utf-8") <span style="color: #75715e;"># Arquivo para ser ignorado</span>
+    print("   - Ambiente de teste criado.")
+
+<span style="color: #f92672;">def</span> <span style="color: #a6e22e;">consolidar_relatorios</span>():
+    print("\n2. Iniciando consolidação...")
+    
+    <span style="color: #75715e;"># Procura por TODOS os arquivos .txt dentro do diretório</span>
+    arquivos_txt = list(DIRETORIO_RELATORIOS.glob("*.txt"))
+    
+    <span style="color: #f92672;">if</span> <span style="color: #f92672;">not</span> arquivos_txt:
+        print("   - Nenhum arquivo .txt encontrado.")
+        <span style="color: #f92672;">return</span>
+
+    print(f"   - Encontrados {len(arquivos_txt)} arquivos .txt.")
+    
+    <span style="color: #75715e;"># Abre o arquivo final no modo 'w' (para apagar o anterior)</span>
+    <span style="color: #f92672;">try</span>:
+        <span style="color: #f92672;">with</span> open(ARQUIVO_FINAL, "w", encoding="utf-8") <span style="color: #f92672;">as</span> f_final:
+            <span style="color: #f92672;">for</span> caminho_arquivo <span style="color: #f92672;">in</span> arquivos_txt:
+                <span style="color: #75715e;"># Adiciona um cabeçalho para saber de onde veio o texto</span>
+                f_final.write(f"--- CONTEÚDO DE {caminho_arquivo.name} ---\n")
+                
+                <span style="color: #75715e;"># Lê o conteúdo do arquivo de relatório</span>
+                conteudo = caminho_arquivo.read_text(encoding="utf-8")
+                
+                <span style="color: #75715e;"># Escreve no arquivo consolidado</span>
+                f_final.write(conteudo)
+                f_final.write("\n") <span style="color: #75715e;"># Adiciona espaço</span>
+
+        print(f"\n3. Sucesso! Relatório consolidado salvo em '{ARQUIVO_FINAL}'.")
+    <span style="color: #f92672;">except</span> Exception <span style="color: #f92672;">as</span> e:
+        print(f"Erro durante a consolidação: {e}")
+
+<span style="color: #75715e;"># --- Programa Principal ---</span>
+preparar_ambiente_teste()
+consolidar_relatorios()
 </code></pre>
             </article>
 
